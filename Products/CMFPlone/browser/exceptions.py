@@ -51,7 +51,13 @@ class ExceptionView(BrowserView):
         request.set('disable_plone.leftcolumn', True)
         request.set('disable_plone.rightcolumn', True)
 
-        return template(
-            error_type=error_type,
-            error_tb=error_tb,
-        )
+        try:
+            return template(
+                error_type=error_type,
+                error_tb=error_tb,
+            )
+        except:
+            return self.basic_template(
+                error_type=error_type,
+                error_tb=error_tb,
+            )

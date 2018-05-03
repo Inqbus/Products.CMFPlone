@@ -26,6 +26,28 @@ Breaking changes:
 - Some tools from CMFCore are now utilities
   [pbauer]
 
+New features:
+
+- Optional auto-login after passwort (re-)set.
+  [jensens]
+
+- Provide an utility ``dump_json_to_text`` that works both on Python 2.7 an Python 3.
+  [ale-rt]
+
+- Prepare for Python 2 / 3 compatibility.
+  [pbauer]
+
+- Fix imports to work with Python 3.
+  [pbauer]
+
+- Mockup update.
+  [thet]
+
+- add link to Plone.org VPAT accessibility statement
+  [tkimnguyen]
+
+Bug fixes:
+
 - Remove five.pt for Zope 4
   [jensens]
 
@@ -55,25 +77,6 @@ Breaking changes:
 
 - Remove ``plone-generate-gruntfile`` (it is all available through ``plone-compile-resources``).
   [jensens]
-
-New Features:
-
-- Provide an utility ``dump_json_to_text`` that works both on Python 2.7 an Python 3.
-  [ale-rt]
-
-- Prepare for Python 2 / 3 compatibility.
-  [pbauer]
-
-- Fix imports to work with Python 3.
-  [pbauer]
-
-- Mockup update.
-  [thet]
-
-- add link to Plone.org VPAT accessibility statement
-  [tkimnguyen]
-
-Bug Fixes:
 
 - Hide ``plone.app.querystring`` from add-ons control panel.
   Fixes `issue 2426 <https://github.com/plone/Products.CMFPlone/issues/2426>`_.
@@ -177,5 +180,5 @@ Bug Fixes:
   It does not make much sense anyway and we test nowhere if there is a came_from on that link.
   [jensens]
 
-- Remove depricated ``type`` attribute from ``script`` and ``link`` tags.
+- Remove deprecated ``type`` attribute from ``script`` and ``link`` tags.
   [newbazz]

@@ -10,6 +10,10 @@ Changelog
 
 Breaking changes:
 
+- Adapt tests to `Products.GenericSetup >= 2.0` thus requiring at least that
+  version.
+  [icemac]
+
 - Some tools from CMFCore are now utilities
   [pbauer]
 
@@ -65,10 +69,31 @@ Breaking changes:
 - Remove old PlacelessTranslationService.
   [jensens, ksuess]
 
+- Fix controlpanel quickinstaller view:
+  A not yet installed product must not return any upgrade info.
+  [jensens]
+
+- Fix to make plone/plone.session#11 work:
+  Make test for installation of  plone.session more explicit.
+  [jensens]
+
+- Advanced Catalog Clear And Rebuild feature showed wrong processing time due to new queue processing.
+  This was fixed bei calling ``processQueue()`` after indexing.
+  [jensens]
+
+- Some nested `section id="edit-bar"` tag in folder_contents page #2322
+  [terapyon]
+
 - Remove ``plone-generate-gruntfile`` (it is all available through ``plone-compile-resources``).
   [jensens]
 
 New Features:
+
+- Provide an utility ``dump_json_to_text`` that works both on Python 2.7 an Python 3.
+  [ale-rt]
+
+- Prepare for Python 2 / 3 compatibility.
+  [pbauer]
 
 - Fix imports to work with Python 3.
   [pbauer]
@@ -76,12 +101,38 @@ New Features:
 - Mockup update.
   [thet]
 
+- add link to Plone.org VPAT accessibility statement
+  [tkimnguyen]
+
 Bug Fixes:
+
+- Hide ``plone.app.querystring`` from add-ons control panel.
+  Fixes `issue 2426 <https://github.com/plone/Products.CMFPlone/issues/2426>`_.
+  [maurits]
+
+- Fix tests after changes in disallowed object ids in Zope.
+  [pbauer]
+
+- Do not include too new upgrades when upgrading Plone Site.
+  Otherwise the Plone Site ends up at a newer version that the filesystem code supports,
+  giving an error when upgrading, and resulting in possibly missed upgrades later.
+  Fixes `issue 2377 <https://github.com/plone/Products.CMFPlone/issues/2377>`_.
+  [maurits]
+
+- After site creation, do not render the add-site template: we redirect anyway.
+  [maurits]
+
+- Unflakied a unit test.
+  [Rotonen]
+
+- Do not show TinyMCE menu items with no subitems, Fixes #2245.
+  [mrsaicharan1]
 
 - Fix Exception-View when main_template can't be rendered. Fixes #2325.
   [pbauer]
 
 - Render exceptions as text, not html to fix format of infos after traceback.
+  Display as <pre> for basic and normal error templates.
   [pbauer]
 
 - Removed extra methods and tests for CMFQuickInstallerTool.

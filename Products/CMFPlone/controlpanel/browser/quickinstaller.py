@@ -233,7 +233,7 @@ class InstallerView(BrowserView):
             return
         try:
             self.ps.getProfileDependencyChain(profile['id'])
-        except KeyError, e:
+        except KeyError as e:
             # Don't show twice the same error: old install and profile
             # oldinstall is test in first in other methods we may have an extra
             # 'Products.' in the namespace.
@@ -347,6 +347,8 @@ class InstallerView(BrowserView):
             # No GS profile, not supported.
             return {}
         profile_id = profile['id']
+        if not self.is_profile_installed(profile_id):
+            return {}
         profile_version = str(self.ps.getVersionForProfile(profile_id))
         if profile_version == 'latest':
             profile_version = self.get_latest_upgrade_step(profile_id)
@@ -709,7 +711,7 @@ class UninstallProductsView(InstallerView):
             messages = IStatusMessage(self.request)
             try:
                 result = self.uninstall_product(product_id)
-            except Exception, e:
+            except Exception as e:
                 logger.error("Could not uninstall %s: %s", product_id, e)
                 msg_type = 'error'
                 msg = _(u'Error uninstalling ${product}.', mapping={

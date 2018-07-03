@@ -507,10 +507,16 @@ class CatalogTool(PloneBaseTool, BaseTool):
         if not show_inactive and not self.allow_inactive(kw):
             kw['effectiveRange'] = DateTime()
 
+        # remove sort_on fields not backed by an index
         sort_on = kw.get('sort_on')
-        if sort_on and sort_on not in self.indexes():
-            # I get crazy sort_ons like '194' or 'null'.
-            kw.pop('sort_on')
+        if sort_on :
+            indexes = self.indexes()
+            if not isinstance(sort_on, (list, tuple)):
+                sort_on = (sort_on)
+            for sort_idx in sort_on:
+                if sort_idx not in indexes:
+                    sort_on.delete(sort_idx)
+            kw['sort_on'] = sort_on
 
         return ZCatalog.searchResults(self, REQUEST, **kw)
 

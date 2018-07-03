@@ -512,7 +512,7 @@ class CatalogTool(PloneBaseTool, BaseTool):
         if sort_on :
             indexes = self.indexes()
             if not isinstance(sort_on, (list, tuple)):
-                sort_on = (sort_on)
+                sort_on = [sort_on]
             for sort_idx in sort_on:
                 if sort_idx not in indexes:
                     sort_on.delete(sort_idx)
